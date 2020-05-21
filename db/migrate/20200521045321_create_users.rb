@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.string :terms_of_service
+#      t.string :terms_of_service
 
       t.timestamps
     end
