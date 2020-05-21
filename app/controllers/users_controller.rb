@@ -24,16 +24,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    # FormObjectにする
     @user = UserRegistrationForm.new(user_registration_form_params)
-    fail
+
+    # @user_form.valid? とかしてもいい
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to @user.user, notice: 'User was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,6 +72,9 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :terms_of_service)
     end
+
+    # 飛んでくるパラメータ中のモデル名のところがFormObject名になってるのでStrongParamtersを変更
+    # "user_registration_form"=>{"name"=>"a", "email"=>"b", "terms_of_service"=>"1"}
     def user_registration_form_params
       params.require(:user_registration_form).permit(:name, :email, :terms_of_service)
     end
