@@ -9,7 +9,10 @@ class UserRegistrationForm
 
   # このFormObject用のバリデーション（なのでUserモデルと違って良い）
   validates :name, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+#  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+#  validates :email, email: true
+  validates :email, email: { message: "Invalid Error!" }
+#  validates :email, email: true, presence: true # 他のオプション渡しても良い
   validates :terms_of_service, acceptance: { allow_nil: false }
   # acceptanceはチェックボックス確認用 https://railsguides.jp/active_record_validations.html#acceptance
 
